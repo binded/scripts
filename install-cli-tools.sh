@@ -114,9 +114,25 @@ function install() {
     version_var="$(echo "$pkg" | tr '[:lower:]' '[:upper:]')_VERSION"
     "install_${pkg}" "${!version_var}" &
   done
-  # installs everything in parallel yay!
-  wait
+  # Wait for all background jobs and if one of them fails, exit early
+  # with its exit code
+  while true; do
+    wait -n || {
+      code="$?"
+      ([[ $code = "127" ]] && exit 0 || exit "$code")
+      break
+    }
+  done;
 }
+
+clean() {
+  # kill background jobs
+  local pids
+  pids=($(jobs -p))
+  kill "${pids[@]}" 2> /dev/null || true
+}
+
+trap 'clean' EXIT
 
 initOS
 install "$@"
