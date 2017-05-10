@@ -81,7 +81,7 @@ function install_terraform() {
   echo "Downloading terraform v${version}"
   cd /tmp
   wget --quiet -O terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${version}_${OS}_amd64.zip"
-  unzip terraform.zip
+  unzip -o terraform.zip
   mv -f terraform "${INSTALL_PREFIX}/terraform"
   echo "Installed terraform v${version}"
 }
