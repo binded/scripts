@@ -48,7 +48,7 @@ function install_kops() {
   cd /tmp
   wget --quiet -O kops "https://github.com/kubernetes/kops/releases/download/${version}/kops-${OS}-amd64"
   chmod +x kops
-  mv kops "${INSTALL_PREFIX}/kops"
+  mv -f kops "${INSTALL_PREFIX}/kops"
   echo "Installed kops v${version}"
 }
 
@@ -65,7 +65,7 @@ function install_kubectl() {
   cd /tmp
   wget --quiet -O kubectl "https://storage.googleapis.com/kubernetes-release/release/v${version}/bin/${OS}/amd64/kubectl"
   chmod +x kubectl
-  mv kubectl "${INSTALL_PREFIX}/kubectl"
+  mv -f kubectl "${INSTALL_PREFIX}/kubectl"
   echo "Installed kubectl v${version}"
 }
 
@@ -82,7 +82,7 @@ function install_terraform() {
   cd /tmp
   wget --quiet -O terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${version}_${OS}_amd64.zip"
   unzip terraform.zip
-  mv terraform "${INSTALL_PREFIX}/terraform"
+  mv -f terraform "${INSTALL_PREFIX}/terraform"
   echo "Installed terraform v${version}"
 }
 
@@ -99,7 +99,7 @@ function install_helm() {
   cd /tmp
   wget --quiet -O helm.tar.gz "https://storage.googleapis.com/kubernetes-helm/helm-v${version}-${OS}-amd64.tar.gz"
   tar xzf helm.tar.gz
-  mv "${OS}-amd64/helm" "${INSTALL_PREFIX}/helm"
+  mv -f "${OS}-amd64/helm" "${INSTALL_PREFIX}/helm"
   echo "Installed helm v${version}"
 }
 
